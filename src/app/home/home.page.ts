@@ -66,7 +66,7 @@ export class HomePage implements OnInit {
       return loading.present();
       setTimeout(() => {
         loading.dismiss();
-      }, 5000);
+      }, 3000);
     }, error => {
         loading.dismiss();
     });
@@ -86,6 +86,9 @@ export class HomePage implements OnInit {
         loading.dismiss();
       });
       return loading.present();
+      setTimeout(() => {
+        loading.dismiss();
+      }, 3000);
     }, error => {
       loading.dismiss();
     });
@@ -102,7 +105,7 @@ export class HomePage implements OnInit {
 
   playVideo() {
       let data: Observable<any>;
-      let url = this.myFunc.domainURL + 'handlers/daijiLive.ashx?mode=list';
+      const url = this.myFunc.domainURL + 'handlers/daijiLive.ashx?mode=list';
       const options: InAppBrowserOptions = {
         toolbar: 'no',
         location: 'no',
