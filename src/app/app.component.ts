@@ -13,12 +13,42 @@ export class AppComponent {
     {
       title: 'Home',
       url: '/home',
-      icon: 'home'
+      icon: 'home',
     },
     {
-      title: 'List',
+      title: 'Karvalli',
       url: '/list',
-      icon: 'list'
+      icon: 'paper',
+      newsCat : 'karvalli'
+    },
+     {
+      title: 'State / National',
+      url: '/list',
+      icon: 'globe',
+      newsCat: 'national'
+    },
+    {
+      title: 'International',
+      url: '/list',
+      icon: 'planet',
+      newsCat: 'international'
+    },
+    {
+      title: 'Sports',
+      url: '/list',
+      icon: 'football',
+      newsCat: 'sports'
+    },
+    {
+      title: 'Enterainment',
+      url: '/list',
+      icon: 'desktop',
+      newsCat: 'entertainment'
+    },
+    {
+      title: 'Upcoming Programs',
+      url: '/upcoming',
+      icon: 'trending-up',
     }
   ];
 

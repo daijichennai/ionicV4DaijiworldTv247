@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-title>Upcoming Programs</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item *ngFor="let i of listOfUpcomingPro">
+    <ion-label>
+      <h2 class="colorRed" [innerHTML]="i.prgTitle" text-wrap></h2>
+      <p>
+        <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>&nbsp;{{i.prgDatehourSlot}}
+      </p>
+    </ion-label>
+  </ion-item>
+
+</ion-content>

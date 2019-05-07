@@ -1,5 +1,7 @@
 {
   "name": "daijiworldTv247",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

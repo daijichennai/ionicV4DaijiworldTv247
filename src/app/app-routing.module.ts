@@ -3,18 +3,16 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
+    path: '', redirectTo: 'home', pathMatch: 'full'
   },
   {
-    path: 'home',
-    loadChildren: './home/home.module#HomePageModule'
+    path: 'home', loadChildren: './home/home.module#HomePageModule'
   },
   {
-    path: 'list',
-    loadChildren: './list/list.module#ListPageModule'
-  }
+    path: 'list/:newsCat', loadChildren: './list/list.module#ListPageModule'
+  },
+  { path: 'newsdisplay/:newsID', loadChildren: './newsdisplay/newsdisplay.module#NewsdisplayPageModule' },
+  { path: 'upcoming', loadChildren: './upcoming/upcoming.module#UpcomingPageModule' },
 ];
 
 @NgModule({

@@ -1,39 +1,73 @@
 import { Component, OnInit } from '@angular/core';
-
+import { ActivatedRoute } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
+import { HttpClient } from '@angular/common/http';
+import { CommfuncService } from '../service/commfunc.service';
 @Component({
   selector: 'app-list',
   templateUrl: 'list.page.html',
   styleUrls: ['list.page.scss']
 })
 export class ListPage implements OnInit {
-  private selectedItem: any;
-  private icons = [
-    'flask',
-    'wifi',
-    'beer',
-    'football',
-    'basketball',
-    'paper-plane',
-    'american-football',
-    'boat',
-    'bluetooth',
-    'build'
-  ];
-  public items: Array<{ title: string; note: string; icon: string }> = [];
-  constructor() {
-    for (let i = 1; i < 11; i++) {
-      this.items.push({
-        title: 'Item ' + i,
-        note: 'This is item #' + i,
-        icon: this.icons[Math.floor(Math.random() * this.icons.length)]
-      });
-    }
+  newsCat = null;
+  public jsonItems: any;
+  public domainURL: String = '';
+  private intLastNewsID: number;
+  public listOfNewsInfinite: any;
+  public strNewsCatName :string='';
+  constructor(
+        private activatedRoute: ActivatedRoute,
+        public http: HttpClient,
+        public loadingCtrl: LoadingController,
+        public myFunc: CommfuncService
+    ) {
   }
 
   ngOnInit() {
+     this.domainURL = this.myFunc.domainURL;
+     this.newsCat = this.activatedRoute.snapshot.paramMap.get('newsCat');
+     this.strNewsCatName = this.myFunc.sectionName(this.newsCat);
+     // alert(this.newsCat);
+     this.getNewsDataByNewsCat();
   }
-  // add back when alpha.4 is out
-  // navigate(item) {
-  //   this.router.navigate(['/list', JSON.stringify(item)]);
-  // }
+
+  async  getNewsDataByNewsCat() {
+    let data: any;
+    const url = this.domainURL + 'handlers/getNewsByCat.ashx?newsCategory=' + this.newsCat;
+    const loading = await this.loadingCtrl.create({
+      message: 'Please Wait...',
+    });
+    data = this.http.get(url);
+    loading.present().then(() => {
+      data.subscribe(result => {
+        console.log(result);
+        this.jsonItems = result;
+        const dataLength = this.jsonItems.length;
+        this.intLastNewsID = this.jsonItems[dataLength - 1].newsID;
+        console.log('Last News ID : ' + this.intLastNewsID);
+        loading.dismiss();
+      });
+      return loading.present();
+    }, error => {
+        loading.dismiss();
+    });
+  }
+
+  doInfinite(event) {
+    setTimeout(() => {
+      const infiniteURL = this.myFunc.domainURL + 'handlers/getNewsByCat.ashx?lastNewsID=' + this.intLastNewsID + '&newsCategory=' + this.newsCat;
+      const infinteData = this.http.get(infiniteURL);
+      infinteData.subscribe(result => {
+        console.log(result);
+        this.listOfNewsInfinite = result;
+        const newData = this.listOfNewsInfinite;
+        this.intLastNewsID = this.listOfNewsInfinite[newData.length - 1].newsID;
+        for (let i = 0; i < newData.length; i++) {
+          this.jsonItems.push(newData[i]);
+        }
+        event.target.complete();
+      });
+    }, 500);
+  }
+
 }

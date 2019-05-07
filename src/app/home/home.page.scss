@@ -2,3 +2,21 @@
   max-height: 35vh;
   overflow: hidden;
 }
+.card-background-page {
+  ion-card {
+    position  : relative;
+    text-align: left;
+  }
+  .card-title {
+    position        : absolute;
+    top             : 10%;
+    left            : 25px;
+    font-size       : 1em;
+    font-style      : normal;
+    color           : #fff;
+    background-color: rgb(255, 51, 51);
+    border         : none;
+    padding        : 10px 20px;
+    text-decoration: none;
+  }
+}

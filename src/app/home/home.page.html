@@ -1,44 +1,40 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="danger">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      Home
+      Daijiworld Tv 247
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <ion-card class="welcome-card">
-      <ion-img src="/assets/shapes.svg"></ion-img>
-      <ion-card-header>
-        <ion-card-subtitle>Get Started</ion-card-subtitle>
-        <ion-card-title>Welcome to Ionic</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <p>Now that your app has been created, you'll want to start building out features and components. Check out some of the resources below for next steps.</p>
-      </ion-card-content>
-    </ion-card>
-    <ion-list lines="none">
-      <ion-list-header>
-        <ion-label>Resources</ion-label>
-      </ion-list-header>
-      <ion-item href="https://ionicframework.com/docs/">
-        <ion-icon slot="start" color="medium" name="book"></ion-icon>
-        <ion-label>Ionic Documentation</ion-label>
-      </ion-item>
-      <ion-item href="https://ionicframework.com/docs/building/scaffolding">
-        <ion-icon slot="start" color="medium" name="build"></ion-icon>
-        <ion-label>Scaffold Out Your App</ion-label>
-      </ion-item>
-      <ion-item href="https://ionicframework.com/docs/layout/structure">
-        <ion-icon slot="start" color="medium" name="grid"></ion-icon>
-        <ion-label>Change Your App Layout</ion-label>
-      </ion-item>
-      <ion-item href="https://ionicframework.com/docs/theming/basics">
-        <ion-icon slot="start" color="medium" name="color-fill"></ion-icon>
-        <ion-label>Theme Your App</ion-label>
-      </ion-item>
-    </ion-list>
+  <ion-list padding (click)="playVideo()">
+    <img src="https://www.daijiworld.com/images/daijiworld247.jpg" width="100%">
+  </ion-list>
+  <ion-card>
+    <ion-slides loop="true" autoplay="1000" pager>
+      <ion-slide *ngFor="let fi of featuredItems">
+        <img [src]="fi.homePageImage" routerLink="/newsdisplay/{{fi.newsID}}" routerDirection="forward" width="100%"
+          src="{{fi.homePageImage}}" />
+      </ion-slide>
+    </ion-slides>
+  </ion-card>
+  <ion-card class="welcome-card" *ngFor="let i of jsonItems" >
+    
+    <ion-card-header class="card-background-page">
+    <ion-img [src]="i.homePageImage" routerLink="/newsdisplay/{{i.newsID}}"
+    routerDirection="forward">
+    </ion-img>
+
+    <ion-card-subtitle routerLink="/list/{{i.newsCategory}}" routerDirection="forward" class="card-title">
+      {{myFunc.sectionName(i.newsCategory)}}
+    </ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content routerLink="/newsdisplay/{{i.newsID}}" routerDirection="forward">
+      <ion-card-subtitle [innerHTML]="i.newsTitle"></ion-card-subtitle>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar color="danger" >
+    <ion-title>News Details</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+<div *ngFor="let s of singleJson">
+  <h4 ion-text>{{s.newsTitle}}</h4>
+  <ion-row>
+    <ion-col>
+        <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>&nbsp;{{s.newsDate}}
+    </ion-col>
+  </ion-row>
+
+  <p ion-text text-justify [innerHtml]="s.newsDescription"></p>
+</div>
+<ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="shareNews();">
+  <ion-fab-button color="danger">
+    <ion-icon name="share"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+</ion-content>
