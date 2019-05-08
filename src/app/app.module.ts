@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { Network } from '@ionic-native/network/ngx';
+// import { Firebase } from '@ionic-native/firebase/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,6 +30,7 @@ import { Network } from '@ionic-native/network/ngx';
     InAppBrowser,
     ScreenOrientation,
     Network,
+   //  Firebase,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

@@ -4,10 +4,13 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding-left padding-right>
+<ion-content class="ion-padding-start ion-padding-end">
 <div *ngFor="let s of singleJson">
   <h4 ion-text>{{s.newsTitle}}</h4>
   <ion-row>

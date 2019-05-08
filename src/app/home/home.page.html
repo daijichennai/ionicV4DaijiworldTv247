@@ -16,7 +16,7 @@
   <ion-card>
     <ion-slides loop="true" autoplay="1000" pager>
       <ion-slide *ngFor="let fi of featuredItems">
-        <img [src]="fi.homePageImage" routerLink="/newsdisplay/{{fi.newsID}}" routerDirection="forward" width="100%"
+        <img [src]="fi.homePageImage" routerLink="/newsdisplay/{{fi.newsID}}" style="height:50%; " routerDirection="forward"  width="100%"
           src="{{fi.homePageImage}}" />
       </ion-slide>
     </ion-slides>
