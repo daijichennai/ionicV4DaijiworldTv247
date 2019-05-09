@@ -11,16 +11,24 @@
 
 <ion-content>
   <ion-list padding (click)="playVideo()">
-    <img src="https://www.daijiworld.com/images/daijiworld247.jpg" width="100%">
+    <img src="https://www.tvdaijiworld.com/img_tv247/daiji247LiveApp.png" width="100%">
   </ion-list>
-  <ion-card>
+  
     <ion-slides loop="true" autoplay="1000" pager>
       <ion-slide *ngFor="let fi of featuredItems">
-        <img [src]="fi.homePageImage" routerLink="/newsdisplay/{{fi.newsID}}" style="height:50%; " routerDirection="forward"  width="100%"
-          src="{{fi.homePageImage}}" />
+          <ion-card  routerLink="/newsdisplay/{{fi.newsID}}"  routerDirection="forward">    
+              <ion-card-header >
+                  <img [src]="fi.homePageImage"   width="100%"
+                  src="{{fi.homePageImage}}" />              
+                  <ion-card-content >
+                    <ion-card-subtitle [innerHTML]="fi.newsTitle" class="ion-text-start ion-text-left" color="danger"></ion-card-subtitle>
+                  </ion-card-content>
+              </ion-card-header>          
+              
+            </ion-card>
       </ion-slide>
     </ion-slides>
-  </ion-card>
+  
   <ion-card class="welcome-card" *ngFor="let i of jsonItems" >
     
     <ion-card-header class="card-background-page">
@@ -29,12 +37,12 @@
     </ion-img>
 
     <ion-card-subtitle routerLink="/list/{{i.newsCategory}}" routerDirection="forward" class="card-title">
-      {{myFunc.sectionName(i.newsCategory)}}
+      {{myFunc.sectionName(i.newsCategoryName)}}
     </ion-card-subtitle>
     </ion-card-header>
 
     <ion-card-content routerLink="/newsdisplay/{{i.newsID}}" routerDirection="forward">
-      <ion-card-subtitle [innerHTML]="i.newsTitle"></ion-card-subtitle>
+      <ion-card-subtitle [innerHTML]="i.newsTitle" color="danger"></ion-card-subtitle>
     </ion-card-content>
   </ion-card>
 </ion-content>

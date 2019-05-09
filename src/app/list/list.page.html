@@ -14,7 +14,7 @@
     routerDirection="forward">
     <ion-img [src]="i.homePageImage"></ion-img>
     <ion-card-header>
-      <ion-card-subtitle [innerHTML]="i.newsTitle"></ion-card-subtitle>
+      <ion-card-subtitle [innerHTML]="i.newsTitle" color="danger"></ion-card-subtitle>
     </ion-card-header>
   </ion-card>
     <ion-infinite-scroll (ionInfinite)="doInfinite($event)">

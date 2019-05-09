@@ -12,7 +12,7 @@
 
 <ion-content class="ion-padding-start ion-padding-end">
 <div *ngFor="let s of singleJson">
-  <h4 ion-text>{{s.newsTitle}}</h4>
+  <h4 ion-text style="color:red" [innerHTML]="s.newsTitle" ></h4>
   <ion-row>
     <ion-col>
         <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>&nbsp;{{s.newsDate}}
