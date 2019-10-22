@@ -1,10 +1,11 @@
 import { Component, OnInit} from '@angular/core';
-import { LoadingController ,ToastController  } from '@ionic/angular';
+import { LoadingController, ToastController  } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { CommfuncService } from '../service/commfunc.service';
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser/ngx';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { Network } from '@ionic-native/network/ngx';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { Observable } from 'rxjs';
 @Component({
   selector: 'app-home',
@@ -13,7 +14,7 @@ import { Observable } from 'rxjs';
 })
 export class HomePage implements OnInit {
   public jsonItems: any;
-  public domainURL: String = '';
+  public domainURL = '';
   public featuredItems: any;
 
   constructor(
@@ -23,7 +24,8 @@ export class HomePage implements OnInit {
     private iab: InAppBrowser,
     private so: ScreenOrientation,
     private network: Network,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private mySocialShare: SocialSharing
   ) { }
 
   ngOnInit() {
@@ -128,6 +130,17 @@ export class HomePage implements OnInit {
 
   lockLandscape() {
     this.so.lock('landscape');
+  }
+
+  shareNews(newsID, newsTitle) {
+    let shareLink = '';
+    shareLink = this.myFunc.domainURL + 'newsDisplay.aspx?newsID=' +  newsID;
+    this.mySocialShare.share(newsTitle, null, null, shareLink).then(() => {
+      console.log('success');
+    }).catch((error) => {
+      console.log(error);
+      console.log('error');
+    });
   }
 
 }

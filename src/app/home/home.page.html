@@ -1,48 +1,56 @@
 <ion-header>
-  <ion-toolbar color="danger">
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>
-      Daijiworld Tv 247
-    </ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="danger">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>
+            Daijiworld Tv 247
+        </ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list padding (click)="playVideo()">
-    <img src="https://www.tvdaijiworld.com/img_tv247/daiji247LiveApp.png" width="100%">
-  </ion-list>
-  
-    <ion-slides loop="true" autoplay="1000" pager>
-      <ion-slide *ngFor="let fi of featuredItems">
-          <ion-card  routerLink="/newsdisplay/{{fi.newsID}}"  routerDirection="forward">    
-              <ion-card-header >
-                  <img [src]="fi.homePageImage"   width="100%"
-                  src="{{fi.homePageImage}}" />              
-                  <ion-card-content >
-                    <ion-card-subtitle [innerHTML]="fi.newsTitle" class="ion-text-start ion-text-left" color="danger"></ion-card-subtitle>
-                  </ion-card-content>
-              </ion-card-header>          
-              
+    <ion-list padding (click)="playVideo()">
+        <img src="https://www.tvdaijiworld.com/img_tv247/daiji247LiveApp.png" width="100%" />
+    </ion-list>
+
+    <ion-slides autoplay="5000" loop="true" speed="3000" pager style="height:300px;width:100%">
+        <ion-slide *ngFor="let fi of featuredItems">
+            <ion-card routerLink="/newsdisplay/{{ fi.newsID }}" routerDirection="forward">
+                <ion-card-header>
+                    <!-- <img [src]="fi.homePageImage" width="100%" src="{{ fi.homePageImage }}" /> -->
+                    <img [src]="fi.homePageImage" style="height:200px;width:100%" />
+                    <ion-card-content>
+                        <ion-card-subtitle [innerHTML]="fi.newsTitle" class="ion-text-start ion-text-left" color="danger"></ion-card-subtitle>
+                    </ion-card-content>
+                </ion-card-header>
             </ion-card>
-      </ion-slide>
+        </ion-slide>
     </ion-slides>
-  
-  <ion-card class="welcome-card" *ngFor="let i of jsonItems" >
-    
-    <ion-card-header class="card-background-page">
-    <ion-img [src]="i.homePageImage" routerLink="/newsdisplay/{{i.newsID}}"
-    routerDirection="forward">
-    </ion-img>
 
-    <ion-card-subtitle routerLink="/list/{{i.newsCategory}}" routerDirection="forward" class="card-title">
-      {{myFunc.sectionName(i.newsCategoryName)}}
-    </ion-card-subtitle>
-    </ion-card-header>
+    <ion-card *ngFor="let i of jsonItems">
+        <ion-card-header class="card-background-page">
+            <ion-img [src]="i.homePageImage" routerLink="/newsdisplay/{{ i.newsID }}" routerDirection="forward">
+            </ion-img>
+            <ion-card-subtitle routerLink="/list/{{ i.newsCategoryName }}" routerDirection="forward" class="card-title">
+                {{ myFunc.sectionName(i.newsCategoryName) }}
+            </ion-card-subtitle>
+        </ion-card-header>
 
-    <ion-card-content routerLink="/newsdisplay/{{i.newsID}}" routerDirection="forward">
-      <ion-card-subtitle [innerHTML]="i.newsTitle" color="danger"></ion-card-subtitle>
-    </ion-card-content>
-  </ion-card>
+        <ion-card-content>
+            <ion-card-subtitle [innerHTML]="i.newsTitle" color="danger" routerLink="/newsdisplay/{{ i.newsID }}" routerDirection="forward"></ion-card-subtitle>
+        </ion-card-content>
+
+        <ion-row>
+            <ion-col padding>
+                <ion-icon color="danger" name="clock"></ion-icon>&nbsp;
+                <span style="color:#f25454;" text-capitalize [innerHTML]="i.newsDate"></span>
+            </ion-col>
+
+            <ion-col padding align-self-center text-right (click)="shareNews(i.newsID,i.newsTitle)">
+                <ion-icon style="color:#f25454;" name="share-alt"></ion-icon>
+                <span style="color:#f25454;" text-capitalize>&nbsp;Share</span>
+            </ion-col>
+        </ion-row>
+    </ion-card>
 </ion-content>

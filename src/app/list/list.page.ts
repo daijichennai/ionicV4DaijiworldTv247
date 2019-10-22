@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { CommfuncService } from '../service/commfunc.service';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+
 @Component({
   selector: 'app-list',
   templateUrl: 'list.page.html',
@@ -19,7 +21,8 @@ export class ListPage implements OnInit {
         private activatedRoute: ActivatedRoute,
         public http: HttpClient,
         public loadingCtrl: LoadingController,
-        public myFunc: CommfuncService
+        public myFunc: CommfuncService,
+        private mySocialShare: SocialSharing
     ) {
   }
 
@@ -68,6 +71,17 @@ export class ListPage implements OnInit {
         event.target.complete();
       });
     }, 500);
+  }
+
+  shareNews(newsID, newsTitle) {
+    let shareLink = '';
+    shareLink = this.myFunc.domainURL + 'newsDisplay.aspx?newsID=' + newsID;
+    this.mySocialShare.share(newsTitle, null, null, shareLink).then(() => {
+      console.log('success');
+    }).catch((error) => {
+      console.log(error);
+      console.log('error');
+    });
   }
 
 }

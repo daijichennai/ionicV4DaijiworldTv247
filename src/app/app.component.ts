@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { CommfuncService } from './service/commfunc.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+// import { FCM } from '@ionic-native/fcm/ngx';
 
 @Component({
   selector: 'app-root',
@@ -55,12 +56,13 @@ export class AppComponent {
       icon: 'trending-up',
     }
   ];
-  
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     // public fireBase: Firebase,
+    // private fcm: FCM,
     public myFunc: CommfuncService,
     public http: HttpClient,
     private router: Router
@@ -73,6 +75,27 @@ export class AppComponent {
       this.domainName = this.myFunc.domainURL;
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+
+
+      // this.fcm.getToken().then(token => {
+      //   console.log(token);
+      //   window.localStorage.setItem('token', token);
+      //   this.pushDeviceID(token);
+      // });
+
+
+      // this.fcm.onNotification().subscribe(data => {
+      //   console.log(data);
+      //   if (data.wasTapped) {
+      //   console.log('Received in background');
+      //   this.pushNotificationRedirect();
+      //   // this.router.navigate([data.landing_page, data.price]);
+      // } else {
+      //   console.log('Received in foreground');
+      //   this.pushNotificationRedirect();
+      //   // this.router.navigate([data.landing_page, data.price]);
+      //   }
+      // });
 
       // this.fireBase.getToken().then(token => {
       //   // alert('Token ID = ' + token);;
@@ -96,7 +119,7 @@ export class AppComponent {
 
   pushDeviceID(tokenID) {
     const insTokenURL = this.domainName + 'handlers/addAndroidDeviceID.ashx?deviceMode=insert&deviceID=' + tokenID;
-    this.http.post(insTokenURL,'').subscribe(
+    this.http.post(insTokenURL, '').subscribe(
       data => {
         if (data[0].status === 'success') {
           // alert(data[0].status);

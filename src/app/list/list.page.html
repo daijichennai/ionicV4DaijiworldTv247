@@ -1,24 +1,48 @@
 <ion-header>
-  <ion-toolbar color="danger" >
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>
-      {{strNewsCatName}}
-    </ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="danger">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>
+            {{strNewsCatName}}
+        </ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card class="welcome-card" *ngFor="let i of jsonItems" routerLink="/newsdisplay/{{i.newsID}}"
+
+    <ion-card *ngFor="let i of jsonItems">
+        <ion-card-header class="card-background-page">
+            <ion-img [src]="i.homePageImage" routerLink="/newsdisplay/{{ i.newsID }}" routerDirection="forward">
+            </ion-img>
+        </ion-card-header>
+
+        <ion-card-content>
+            <ion-card-subtitle [innerHTML]="i.newsTitle" color="danger" routerLink="/newsdisplay/{{ i.newsID }}" routerDirection="forward"></ion-card-subtitle>
+        </ion-card-content>
+
+        <ion-row>
+            <ion-col padding>
+                <ion-icon color="danger" name="clock"></ion-icon>&nbsp;
+                <span style="color:#f25454;" text-capitalize [innerHTML]="i.newsDate"></span>
+            </ion-col>
+
+            <ion-col padding align-self-center text-right (click)="shareNews(i.newsID,i.newsTitle)">
+                <ion-icon style="color:#f25454;" name="share-alt"></ion-icon>
+                <span style="color:#f25454;" text-capitalize>&nbsp;Share</span>
+            </ion-col>
+        </ion-row>
+    </ion-card>
+
+    <!-- <ion-card class="welcome-card" *ngFor="let i of jsonItems" routerLink="/newsdisplay/{{i.newsID}}"
     routerDirection="forward">
     <ion-img [src]="i.homePageImage"></ion-img>
     <ion-card-header>
       <ion-card-subtitle [innerHTML]="i.newsTitle" color="danger"></ion-card-subtitle>
     </ion-card-header>
-  </ion-card>
+  </ion-card> -->
     <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-      <ion-infinite-scroll-content color="primary" loadingSpinner="bubbles" loadingText="Loading more data...">
-      </ion-infinite-scroll-content>
+        <ion-infinite-scroll-content color="primary" loadingSpinner="bubbles" loadingText="Loading more data...">
+        </ion-infinite-scroll-content>
     </ion-infinite-scroll>
 </ion-content>
